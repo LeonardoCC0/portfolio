@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Leonardo Costa | Software Engineer in Progress</title>
+    <meta name="description" content="Portfolio of Leonardo Costa, an aspiring Software Engineer focused on Full Stack Development, AI, and DevOps.">
+    <meta name="keywords" content="Leonardo Costa, Software Engineer, Full Stack, AI, DevOps, Portfolio, Desenvolvedor">
+    <meta name="author" content="Leonardo de Carvalho da Costa">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Leonardo Costa | Software Engineer in Progress">
+    <meta property="og:description" content="Aspiring Software Engineer focused on Full Stack Development, AI, and DevOps.">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#home" class="logo">Leonardo Costa</a>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="#about" data-i18n="nav.about">Sobre</a>
+                <a href="#skills" data-i18n="nav.skills">Habilidades</a>
+                <a href="#experience" data-i18n="nav.experience">Experiência</a>
+                <a href="#project" data-i18n="nav.projects">Projetos</a>
+                <a href="#goals" data-i18n="nav.goals">Objetivos</a>
+                <a href="#contact" data-i18n="nav.contact">Contato</a>
+            </div>
+
+            <div class="nav-controls">
+                <button id="langToggle" class="btn-icon" aria-label="Change Language">
+                    <span id="langText">EN</span>
+                </button>
+                <button id="themeToggle" class="btn-icon" aria-label="Toggle Dark Mode">
+                    <i data-lucide="sun" id="sunIcon" class="hidden"></i>
+                    <i data-lucide="moon" id="moonIcon"></i>
+                </button>
+                <button id="menuToggle" class="btn-icon menu-btn" aria-label="Open Menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section id="home" class="section hero-section">
+            <div class="badge fade-in"><i data-lucide="sparkles" class="icon-sm"></i> <span data-i18n="hero.title">Software Engineer in Progress</span></div>
+            <h1 class="hero-title fade-in">Leonardo de Carvalho da Costa</h1>
+            <p class="hero-subtitle fade-in" data-i18n="hero.subtitle">
+                Aspirante a Engenheiro de Software focado em Full Stack Development, Inteligência Artificial e DevOps.
+            </p>
+            <div class="hero-actions fade-in">
+                <a href="#project" class="btn btn-primary">
+                    <span data-i18n="hero.viewProjects">Ver Projetos</span> <i data-lucide="arrow-right" class="icon-sm"></i>
+                </a>
+                <a href="#contact" class="btn btn-secondary" data-i18n="hero.contact">Entrar em Contato</a>
+                <a href="cv-leonardo.pdf" download class="btn btn-secondary">
+                    <i data-lucide="download" class="icon-sm"></i> <span data-i18n="hero.downloadCV">Download CV</span>
+                </a>
+            </div>
+            <div class="hero-links fade-in">
+                <a href="https://br.linkedin.com/in/leonardo-carvalho-costa" target="_blank" class="link-icon" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                <a href="https://github.com/CostaLeoo" target="_blank" class="link-icon" aria-label="GitHub"><i data-lucide="github"></i></a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section reveal">
+            <h2 class="section-title" data-i18n="about.title">Sobre Mim</h2>
+            <p class="text-lg" data-i18n="about.text">
+                Sou Leonardo, tenho 16 anos e estou construindo minha trajetória para me tornar Engenheiro de Software. Sou uma pessoa proativa, responsável e comprometida com aprendizado contínuo. Tenho paixão por tecnologia, resolução de problemas e desenvolvimento de soluções que impactam positivamente a vida das pessoas. Meu objetivo é cursar uma universidade nos Estados Unidos e construir uma carreira sólida na área de tecnologia.
+            </p>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section reveal">
+            <h2 class="section-title" data-i18n="skills.title">Habilidades</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-header">
+                        <i data-lucide="code" class="icon-lg"></i>
+                        <h3 data-i18n="skills.fullStack">Full Stack</h3>
+                    </div>
+                    <div class="badges">
+                        <span class="badge-skill">HTML</span>
+                        <span class="badge-skill">CSS</span>
+                        <span class="badge-skill">JavaScript</span>
+                        <span class="badge-skill">TypeScript</span>
+                        <span class="badge-skill">Node.js</span>
+                        <span class="badge-skill">Java</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <i data-lucide="brain-circuit" class="icon-lg"></i>
+                        <h3 data-i18n="skills.ai">Inteligência Artificial</h3>
+                    </div>
+                    <div class="badges">
+                        <span class="badge-skill" data-i18n="skills.ml">Machine Learning Fundamentals</span>
+                        <span class="badge-skill" data-i18n="skills.aiSol">AI Solutions</span>
+                        <span class="badge-skill" data-i18n="skills.problem">Problem Solving</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <i data-lucide="git-branch" class="icon-lg"></i>
+                        <h3 data-i18n="skills.devops">DevOps</h3>
+                    </div>
+                    <div class="badges">
+                        <span class="badge-skill">Git</span>
+                        <span class="badge-skill">GitHub</span>
+                        <span class="badge-skill" data-i18n="skills.cicd">CI/CD Concepts</span>
+                        <span class="badge-skill" data-i18n="skills.deploy">Deployment Concepts</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="section reveal">
+            <h2 class="section-title" data-i18n="experience.title">Experiência Profissional</h2>
+            <div class="timeline">
+                <div class="timeline-dot"></div>
+                <div class="card">
+                    <div class="exp-header">
+                        <h3 data-i18n="experience.role">Assistente Administrativo e de Treinamentos</h3>
+                        <span class="exp-company">Safety for Job</span>
+                    </div>
+                    <div class="exp-content">
+                        <h4 data-i18n="experience.tasksTitle">Responsabilidades</h4>
+                        <ul class="list-check">
+                            <li data-i18n="experience.task1">Organização de planilhas de frota e controle de banco de horas.</li>
+                            <li data-i18n="experience.task2">Auxílio em treinamentos de segurança NR-23, NR-33 e NR-35.</li>
+                            <li data-i18n="experience.task3">Suporte operacional e fiscalização do uso correto de EPIs.</li>
+                        </ul>
+                        <h4 class="mt-4" data-i18n="experience.resultsTitle">Resultados</h4>
+                        <ul class="list-check">
+                            <li data-i18n="experience.result1">Melhor organização dos controles administrativos.</li>
+                            <li data-i18n="experience.result2">Apoio eficiente aos treinamentos e maior atenção à segurança.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Section -->
+        <section id="project" class="section reveal">
+            <h2 class="section-title" data-i18n="project.title">Projeto em Destaque</h2>
+            <div class="card project-card">
+                <div class="project-glow"></div>
+                <div class="relative z-10">
+                    <h3 class="project-title">Double-Tech</h3>
+                    <p class="text-lg mb-6" data-i18n="project.description">
+                        Plataforma de suporte técnico remoto e presencial que conecta clientes a profissionais especializados. O sistema permite que o usuário utilize uma IA para resolução inicial de problemas ou contrate um especialista para atendimento personalizado.
+                    </p>
+                    <div class="mb-6">
+                        <h4 class="text-sm uppercase tracking-wide" data-i18n="project.tech">Tecnologias</h4>
+                        <div class="badges mt-2">
+                            <span class="badge-skill">HTML</span>
+                            <span class="badge-skill">CSS</span>
+                            <span class="badge-skill">JavaScript</span>
+                        </div>
+                    </div>
+                    <a href="https://github.com/CostaLeoo/Double-Tech" target="_blank" class="btn btn-primary">
+                        <i data-lucide="github" class="icon-sm"></i> <span data-i18n="project.viewCode">Ver no GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education, Certs & Languages -->
+        <section id="education" class="section reveal">
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-header">
+                        <i data-lucide="graduation-cap" class="icon-lg"></i>
+                        <h3 data-i18n="education.title">Formação</h3>
+                    </div>
+                    <h4 class="font-semibold" data-i18n="education.degree">Ensino Médio Técnico em TI</h4>
+                    <p class="text-sm text-muted">Instituto Educacional Raphael Di Santo</p>
+                    <p class="text-sm text-muted" data-i18n="education.conclusion">Conclusão: 2027</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <i data-lucide="award" class="icon-lg"></i>
+                        <h3 data-i18n="education.certs">Certificações</h3>
+                    </div>
+                    <ul class="list-dot">
+                        <li data-i18n="education.cert1">Lógica de Programação com JavaScript</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <i data-lucide="languages" class="icon-lg"></i>
+                        <h3 data-i18n="education.langs">Idiomas</h3>
+                    </div>
+                    <ul class="list-dot">
+                        <li data-i18n="education.lang1">Português (Nativo)</li>
+                        <li data-i18n="education.lang2">Inglês (B2)</li>
+                        <li data-i18n="education.lang3">Espanhol (Básico)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Goals Section -->
+        <section id="goals" class="section reveal text-center">
+            <div class="card card-glow mx-auto max-w-2xl">
+                <div class="flex justify-center mb-4">
+                    <div class="icon-circle">
+                        <i data-lucide="target" class="icon-lg"></i>
+                    </div>
+                </div>
+                <h2 class="section-title" data-i18n="goals.title">Future Goals</h2>
+                <p class="text-lg" data-i18n="goals.text">
+                    Busco oportunidades para desenvolver Engenharia de Software e Inteligência Artificial, com o objetivo de estudar nos Estados Unidos e contribuir para projetos de impacto global.
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section reveal text-center">
+            <h2 class="section-title" data-i18n="contact.title">Contato</h2>
+            <p class="text-lg mb-8" data-i18n="contact.subtitle">Me envie um e-mail para oportunidades e parcerias.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="mailto:profissional.leonardocosta@gmail.com?subject=Oportunidade de Trabalho" class="btn btn-primary">
+                    <i data-lucide="mail" class="icon-sm"></i> profissional.leonardocosta@gmail.com
+                </a>
+                <div class="flex gap-4">
+                    <a href="https://br.linkedin.com/in/leonardo-carvalho-costa" target="_blank" class="btn-icon-circle">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                    <a href="https://github.com/CostaLeoo" target="_blank" class="btn-icon-circle">
+                        <i data-lucide="github"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; <span id="year"></span> Leonardo de Carvalho da Costa. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
