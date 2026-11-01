@@ -1,259 +1,386 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO Meta Tags -->
-    <title>Leonardo Costa | Software Engineer in Progress</title>
-    <meta name="description" content="Portfolio of Leonardo Costa, an aspiring Software Engineer focused on Full Stack Development, AI, and DevOps.">
-    <meta name="keywords" content="Leonardo Costa, Software Engineer, Full Stack, AI, DevOps, Portfolio, Desenvolvedor">
-    <meta name="author" content="Leonardo de Carvalho da Costa">
-    
-    <!-- Open Graph / Social Media -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Leonardo Costa | Software Engineer in Progress">
-    <meta property="og:description" content="Aspiring Software Engineer focused on Full Stack Development, AI, and DevOps.">
-    
-    <!-- Fonts & Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leonardo Costa | Portfólio</title>
+  <meta name="description" content="Portfólio de Leonardo de Carvalho da Costa, estudante de TI.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500&family=Yellowtail&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // Aplica o tema salvo antes de desenhar a página (evita "piscar")
+    try { var t = localStorage.getItem('tema'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  </script>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="container nav-container">
-            <a href="#home" class="logo">Leonardo Costa</a>
-            
-            <div class="nav-links" id="navLinks">
-                <a href="#about" data-i18n="nav.about">Sobre</a>
-                <a href="#skills" data-i18n="nav.skills">Habilidades</a>
-                <a href="#experience" data-i18n="nav.experience">Experiência</a>
-                <a href="#project" data-i18n="nav.projects">Projetos</a>
-                <a href="#goals" data-i18n="nav.goals">Objetivos</a>
-                <a href="#contact" data-i18n="nav.contact">Contato</a>
-            </div>
 
-            <div class="nav-controls">
-                <button id="langToggle" class="btn-icon" aria-label="Change Language">
-                    <span id="langText">EN</span>
-                </button>
-                <button id="themeToggle" class="btn-icon" aria-label="Toggle Dark Mode">
-                    <i data-lucide="sun" id="sunIcon" class="hidden"></i>
-                    <i data-lucide="moon" id="moonIcon"></i>
-                </button>
-                <button id="menuToggle" class="btn-icon menu-btn" aria-label="Open Menu">
-                    <i data-lucide="menu"></i>
-                </button>
-            </div>
+  <!-- ===== BARRA DE SEÇÕES (computador) =====
+       Passar o mouse numa coluna troca a seção. Enquanto o mouse está
+       em cima da barra, o objeto 3D vira pontinhos. -->
+  <nav class="nav" id="nav" aria-label="Seções">
+      <div class="nav-item ativo" data-pagina="0" data-slug="" data-nome="Leonardo Costa" data-objeto="Coxstaa" data-legenda="Quem eu sou, no que acredito e como falar comigo">
+        <span class="nav-cat">Leonardo Costa</span>
+        <a class="nav-sub" href="#sobre" data-ir="sobre">Sobre</a>
+        <a class="nav-sub" href="#contato" data-ir="contato">Contato</a>
+      </div>
+      <div class="nav-item" data-pagina="1" data-slug="estudos" data-nome="Estudos" data-objeto="&lt;/&gt;" data-legenda="Minha formação e o que estou aprendendo agora">
+        <span class="nav-cat">Estudos</span>
+        <a class="nav-sub" href="#formacao" data-ir="formacao">Formação</a>
+        <a class="nav-sub" href="#interesses" data-ir="interesses">Interesses</a>
+      </div>
+      <div class="nav-item" data-pagina="2" data-slug="projetos" data-nome="Projetos" data-objeto="{ }" data-legenda="Sistemas e automações que eu criei">
+        <span class="nav-cat">Projetos</span>
+        <a class="nav-sub" href="#sistemas" data-ir="sistemas">Sistemas</a>
+        <a class="nav-sub" href="#automacoes" data-ir="automacoes">Automações</a>
+      </div>
+      <div class="nav-item" data-pagina="3" data-slug="contato" data-nome="Contato" data-objeto="@" data-legenda="Quer conversar? É só chamar">
+        <span class="nav-cat">Contato</span>
+        <a class="nav-sub" href="#email" data-ir="email">E-mail</a>
+        <a class="nav-sub" href="#redes" data-ir="redes">Redes</a>
+      </div>
+  </nav>
+  <button class="btn-tema alternar-tema" aria-label="Alternar modo claro/escuro" title="Modo claro/escuro"><svg class="icone-sol" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="icone-lua" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+
+  <!-- ===== CABEÇALHO (celular) ===== -->
+  <header class="nav-mobile">
+    <div class="paginas">
+      <span class="atual-nome">Leonardo Costa</span>
+      <div class="lista">
+        <button data-pagina="0" class="atual">Leonardo Costa</button>
+        <button data-pagina="1">Estudos</button>
+        <button data-pagina="2">Projetos</button>
+        <button data-pagina="3">Contato</button>
+      </div>
+    </div>
+    <div class="acoes-topo">
+      <button class="btn-icone alternar-tema" aria-label="Alternar modo claro/escuro"><svg class="icone-sol" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="icone-lua" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      <button class="btn-icone btn-menu" id="btn-menu" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- ===== BARRA FIXA (aparece ao rolar) ===== -->
+  <div class="barra-fixa">
+    <button data-pagina="0"><span class="nome">Leonardo Costa</span><span>Estudante de TI</span></button>
+    <div class="lado-direito">
+      <span class="status dot-esquerda">Estudando agora</span>
+      <a href="mailto:profissional.leonardocosta@gmail.com">Contato</a>
+    </div>
+  </div>
+
+  <main>
+    <!-- ===== TOPO ===== -->
+    <section class="hero">
+      <div class="faixas" aria-hidden="true">
+        <div class="faixa"><span>Leonardo Costa Leonardo Costa Leonardo Costa Leonardo Costa Leonardo Costa</span><span>Leonardo Costa Leonardo Costa Leonardo Costa Leonardo Costa Leonardo Costa</span></div>
+        <div class="faixa faixa-reversa"><span>Leonardo Costa Leonardo Costa Leonardo Costa Leonardo Costa Leonardo Costa</span><span>Leonardo Costa Leonardo Costa Leonardo Costa Leonardo Costa Leonardo Costa</span></div>
+        <div class="faixa terceira"><span>Leonardo Costa Leonardo Costa Leonardo Costa Leonardo Costa Leonardo Costa</span><span>Leonardo Costa Leonardo Costa Leonardo Costa Leonardo Costa Leonardo Costa</span></div>
+      </div>
+      <div class="cromado" aria-hidden="true"></div>
+
+      <div class="hero-rodape">
+        <div>
+          <small>Status</small>
+          <span class="status dot-direita">Estudando agora</span>
         </div>
-    </nav>
+        <div class="direita">
+          <small>Escola</small>
+          <span>Instituto Educacional Raphael di Santo</span>
+        </div>
+      </div>
+    </section>
 
-    <main class="container">
-        <!-- Hero Section -->
-        <section id="home" class="section hero-section">
-            <div class="badge fade-in"><i data-lucide="sparkles" class="icon-sm"></i> <span data-i18n="hero.title">Software Engineer in Progress</span></div>
-            <h1 class="hero-title fade-in">Leonardo de Carvalho da Costa</h1>
-            <p class="hero-subtitle fade-in" data-i18n="hero.subtitle">
-                Aspirante a Engenheiro de Software focado em Full Stack Development, Inteligência Artificial e DevOps.
-            </p>
-            <div class="hero-actions fade-in">
-                <a href="#project" class="btn btn-primary">
-                    <span data-i18n="hero.viewProjects">Ver Projetos</span> <i data-lucide="arrow-right" class="icon-sm"></i>
-                </a>
-                <a href="#contact" class="btn btn-secondary" data-i18n="hero.contact">Entrar em Contato</a>
-                <a href="cv-leonardo.pdf" download class="btn btn-secondary">
-                    <i data-lucide="download" class="icon-sm"></i> <span data-i18n="hero.downloadCV">Download CV</span>
-                </a>
-            </div>
-            <div class="hero-links fade-in">
-                <a href="https://br.linkedin.com/in/leonardo-carvalho-costa" target="_blank" class="link-icon" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
-                <a href="https://github.com/CostaLeoo" target="_blank" class="link-icon" aria-label="GitHub"><i data-lucide="github"></i></a>
-            </div>
-        </section>
+    <div class="hero-legenda">
+      <a href="#conteudo" class="seta" aria-label="Rolar para o conteúdo">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M5 13l7 7 7-7"/></svg>
+      </a>
+      <span class="legenda-texto">Quem eu sou, no que acredito e como falar comigo</span>
+    </div>
 
-        <!-- About Section -->
-        <section id="about" class="section reveal">
-            <h2 class="section-title" data-i18n="about.title">Sobre Mim</h2>
-            <p class="text-lg" data-i18n="about.text">
-                Sou Leonardo, tenho 16 anos e estou construindo minha trajetória para me tornar Engenheiro de Software. Sou uma pessoa proativa, responsável e comprometida com aprendizado contínuo. Tenho paixão por tecnologia, resolução de problemas e desenvolvimento de soluções que impactam positivamente a vida das pessoas. Meu objetivo é cursar uma universidade nos Estados Unidos e construir uma carreira sólida na área de tecnologia.
-            </p>
-        </section>
+    <div id="conteudo">
+    <!-- ===== LEONARDO COSTA ===== -->
+    <div class="pagina ativa" data-pagina="0">
+      <!-- SOBRE -->
+      <section id="sobre" class="secao">
+        <div class="secao-esquerda revelar">
+          <h1>Sobre</h1>
+          <p>Sou o Leonardo, tenho 16 anos e sou aluno de TI no ensino médio no Instituto Educacional Raphael di Santo.
+          Amo tecnologia e esportes, e tenho o sonho de morar nos Estados Unidos. No momento estudo JavaScript,
+          Cibersegurança e IA. Ainda estou decidindo qual área seguir, então estudo um pouco de tudo. Sou muito curioso
+          com tecnologia: podem me tirar tudo, menos o meu conhecimento.</p>
+          <figure class="foto">
+            <img src="foto.jpg" alt="Foto de Leonardo Costa" width="960" height="1280" loading="lazy">
+          </figure>
+        </div>
+        <div class="secao-direita revelar">
+          <div class="bloco">
+            <h2>No que eu acredito</h2>
+            <p class="frase">“Conhecimento nunca é demais.”</p>
+            <p class="frase">“Ninguém nunca disse que seria fácil.”</p>
+          </div>
+          <div class="bloco">
+            <h2>Em poucas palavras</h2>
+            <table class="tabela">
+              <thead><tr><th class="w40">O quê</th><th class="dir">Detalhe</th></tr></thead>
+              <tbody>
+                <tr><td>Idade</td><td class="dir">16 anos</td></tr>
+                <tr><td>Curso</td><td class="dir">TI no ensino médio</td></tr>
+                <tr><td>Sonho</td><td class="dir">Morar nos Estados Unidos</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
 
-        <!-- Skills Section -->
-        <section id="skills" class="section reveal">
-            <h2 class="section-title" data-i18n="skills.title">Habilidades</h2>
-            <div class="grid-3">
-                <div class="card">
-                    <div class="card-header">
-                        <i data-lucide="code" class="icon-lg"></i>
-                        <h3 data-i18n="skills.fullStack">Full Stack</h3>
-                    </div>
-                    <div class="badges">
-                        <span class="badge-skill">HTML</span>
-                        <span class="badge-skill">CSS</span>
-                        <span class="badge-skill">JavaScript</span>
-                        <span class="badge-skill">TypeScript</span>
-                        <span class="badge-skill">Node.js</span>
-                        <span class="badge-skill">Java</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <i data-lucide="brain-circuit" class="icon-lg"></i>
-                        <h3 data-i18n="skills.ai">Inteligência Artificial</h3>
-                    </div>
-                    <div class="badges">
-                        <span class="badge-skill" data-i18n="skills.ml">Machine Learning Fundamentals</span>
-                        <span class="badge-skill" data-i18n="skills.aiSol">AI Solutions</span>
-                        <span class="badge-skill" data-i18n="skills.problem">Problem Solving</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <i data-lucide="git-branch" class="icon-lg"></i>
-                        <h3 data-i18n="skills.devops">DevOps</h3>
-                    </div>
-                    <div class="badges">
-                        <span class="badge-skill">Git</span>
-                        <span class="badge-skill">GitHub</span>
-                        <span class="badge-skill" data-i18n="skills.cicd">CI/CD Concepts</span>
-                        <span class="badge-skill" data-i18n="skills.deploy">Deployment Concepts</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <!-- CONTATO -->
+      <section id="contato" class="secao">
+        <div class="secao-esquerda revelar">
+          <h1>Contato</h1>
+          <p>Quer conversar, propor algo ou só trocar uma ideia? É só chamar.</p>
+        </div>
+        <div class="secao-direita revelar">
+          <h2>E-mail</h2>
+          <a class="email-grande" href="mailto:profissional.leonardocosta@gmail.com">profissional.leonardocosta@gmail.com</a>
+          <div class="acoes">
+            <button class="btn-colchete" data-copiar="profissional.leonardocosta@gmail.com">[ Copiar e-mail ]</button>
+            <a class="btn-colchete" href="mailto:profissional.leonardocosta@gmail.com">[ Abrir no app de e-mail ]</a>
+          </div>
+        </div>
+      </section>
+    </div>
 
-        <!-- Experience Section -->
-        <section id="experience" class="section reveal">
-            <h2 class="section-title" data-i18n="experience.title">Experiência Profissional</h2>
-            <div class="timeline">
-                <div class="timeline-dot"></div>
-                <div class="card">
-                    <div class="exp-header">
-                        <h3 data-i18n="experience.role">Assistente Administrativo e de Treinamentos</h3>
-                        <span class="exp-company">Safety for Job</span>
-                    </div>
-                    <div class="exp-content">
-                        <h4 data-i18n="experience.tasksTitle">Responsabilidades</h4>
-                        <ul class="list-check">
-                            <li data-i18n="experience.task1">Organização de planilhas de frota e controle de banco de horas.</li>
-                            <li data-i18n="experience.task2">Auxílio em treinamentos de segurança NR-23, NR-33 e NR-35.</li>
-                            <li data-i18n="experience.task3">Suporte operacional e fiscalização do uso correto de EPIs.</li>
-                        </ul>
-                        <h4 class="mt-4" data-i18n="experience.resultsTitle">Resultados</h4>
-                        <ul class="list-check">
-                            <li data-i18n="experience.result1">Melhor organização dos controles administrativos.</li>
-                            <li data-i18n="experience.result2">Apoio eficiente aos treinamentos e maior atenção à segurança.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- ===== ESTUDOS ===== -->
+    <div class="pagina" data-pagina="1">
+      <!-- FORMAÇÃO -->
+      <section id="formacao" class="secao">
+        <div class="secao-esquerda revelar">
+          <h1>Formação</h1>
+          <p>Um resumo de onde eu estudo e do que estou aprendendo agora.</p>
+        </div>
+        <div class="secao-direita revelar">
+          <div class="bloco">
+            <h2>Escola</h2>
+            <table class="tabela">
+              <thead><tr><th>O quê</th><th>Onde</th><th class="dir">Quando</th></tr></thead>
+              <tbody>
+                <tr><td>Ensino Médio — TI</td><td>Instituto Educacional Raphael di Santo</td><td class="dir">Agora</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="bloco">
+            <h2>Estudando agora</h2>
+            <table class="tabela">
+              <thead><tr><th class="w40">Área</th><th class="dir">Assunto</th></tr></thead>
+              <tbody>
+                <tr><td>Programação</td><td class="dir">JavaScript</td></tr>
+                <tr><td>Segurança</td><td class="dir">Cibersegurança</td></tr>
+                <tr><td>Inteligência Artificial</td><td class="dir">IA</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
 
-        <!-- Project Section -->
-        <section id="project" class="section reveal">
-            <h2 class="section-title" data-i18n="project.title">Projeto em Destaque</h2>
-            <div class="card project-card">
-                <div class="project-glow"></div>
-                <div class="relative z-10">
-                    <h3 class="project-title">Double-Tech</h3>
-                    <p class="text-lg mb-6" data-i18n="project.description">
-                        Plataforma de suporte técnico remoto e presencial que conecta clientes a profissionais especializados. O sistema permite que o usuário utilize uma IA para resolução inicial de problemas ou contrate um especialista para atendimento personalizado.
-                    </p>
-                    <div class="mb-6">
-                        <h4 class="text-sm uppercase tracking-wide" data-i18n="project.tech">Tecnologias</h4>
-                        <div class="badges mt-2">
-                            <span class="badge-skill">HTML</span>
-                            <span class="badge-skill">CSS</span>
-                            <span class="badge-skill">JavaScript</span>
-                        </div>
-                    </div>
-                    <a href="https://github.com/CostaLeoo/Double-Tech" target="_blank" class="btn btn-primary">
-                        <i data-lucide="github" class="icon-sm"></i> <span data-i18n="project.viewCode">Ver no GitHub</span>
-                    </a>
-                </div>
-            </div>
-        </section>
+      <!-- INTERESSES -->
+      <section id="interesses" class="secao">
+        <div class="secao-esquerda revelar">
+          <h1>Interesses</h1>
+          <p>Ainda estou decidindo qual área seguir, então estudo um pouco de tudo.</p>
+        </div>
+        <div class="secao-direita revelar">
+          <h2>Fora da sala</h2>
+          <table class="tabela">
+            <thead><tr><th class="w40">O quê</th><th class="dir">Detalhe</th></tr></thead>
+            <tbody>
+              <tr><td>Tecnologia</td><td class="dir">Curiosidade por tudo</td></tr>
+              <tr><td>Esportes</td><td class="dir">Paixão</td></tr>
+              <tr><td>Sonho</td><td class="dir">Morar nos Estados Unidos</td></tr>
+            </tbody>
+          </table>
+          <div class="acoes"><a class="btn-colchete" href="https://github.com/CostaLeoo" target="_blank" rel="noopener">[ Ver meu GitHub ]</a></div>
+        </div>
+      </section>
+    </div>
 
-        <!-- Education, Certs & Languages -->
-        <section id="education" class="section reveal">
-            <div class="grid-3">
-                <div class="card">
-                    <div class="card-header">
-                        <i data-lucide="graduation-cap" class="icon-lg"></i>
-                        <h3 data-i18n="education.title">Formação</h3>
-                    </div>
-                    <h4 class="font-semibold" data-i18n="education.degree">Ensino Médio Técnico em TI</h4>
-                    <p class="text-sm text-muted">Instituto Educacional Raphael Di Santo</p>
-                    <p class="text-sm text-muted" data-i18n="education.conclusion">Conclusão: 2027</p>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <i data-lucide="award" class="icon-lg"></i>
-                        <h3 data-i18n="education.certs">Certificações</h3>
-                    </div>
-                    <ul class="list-dot">
-                        <li data-i18n="education.cert1">Lógica de Programação com JavaScript</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <i data-lucide="languages" class="icon-lg"></i>
-                        <h3 data-i18n="education.langs">Idiomas</h3>
-                    </div>
-                    <ul class="list-dot">
-                        <li data-i18n="education.lang1">Português (Nativo)</li>
-                        <li data-i18n="education.lang2">Inglês (B2)</li>
-                        <li data-i18n="education.lang3">Espanhol (Básico)</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+    <!-- ===== PROJETOS ===== -->
+    <div class="pagina" data-pagina="2">
+      <!-- PROJETOS (textos tirados dos README do GitHub) -->
+      <section class="secao secao-projetos" id="projetos">
+        <div class="secao-esquerda revelar">
+          <h1>Projetos</h1>
+          <p>Sistemas e automações que eu criei. Alguns resolvem problemas reais de empresas, por isso o código fica privado e o GitHub mostra só a documentação.</p>
+        </div>
+      </section>
 
-        <!-- Goals Section -->
-        <section id="goals" class="section reveal text-center">
-            <div class="card card-glow mx-auto max-w-2xl">
-                <div class="flex justify-center mb-4">
-                    <div class="icon-circle">
-                        <i data-lucide="target" class="icon-lg"></i>
-                    </div>
-                </div>
-                <h2 class="section-title" data-i18n="goals.title">Future Goals</h2>
-                <p class="text-lg" data-i18n="goals.text">
-                    Busco oportunidades para desenvolver Engenharia de Software e Inteligência Artificial, com o objetivo de estudar nos Estados Unidos e contribuir para projetos de impacto global.
-                </p>
-            </div>
-        </section>
+      <div class="divisor revelar" id="sistemas"><span>Sistemas</span><span>(2)</span></div>
 
-        <!-- Contact Section -->
-        <section id="contact" class="section reveal text-center">
-            <h2 class="section-title" data-i18n="contact.title">Contato</h2>
-            <p class="text-lg mb-8" data-i18n="contact.subtitle">Me envie um e-mail para oportunidades e parcerias.</p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="mailto:profissional.leonardocosta@gmail.com?subject=Oportunidade de Trabalho" class="btn btn-primary">
-                    <i data-lucide="mail" class="icon-sm"></i> profissional.leonardocosta@gmail.com
-                </a>
-                <div class="flex gap-4">
-                    <a href="https://br.linkedin.com/in/leonardo-carvalho-costa" target="_blank" class="btn-icon-circle">
-                        <i data-lucide="linkedin"></i>
-                    </a>
-                    <a href="https://github.com/CostaLeoo" target="_blank" class="btn-icon-circle">
-                        <i data-lucide="github"></i>
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
+      <article class="projeto revelar">
+        <div class="projeto-imagens">
+          <figure>
+            <img src="img/minhanfc-inicio.jpg" alt="Página inicial do site minhanfc.com.br" width="1600" height="1000" loading="lazy">
+          </figure>
+          <figure>
+            <img src="img/minhanfc-planos.jpg" alt="Planos das plaquinhas no site minhanfc.com.br" width="1600" height="1000" loading="lazy">
+          </figure>
+        </div>
+        <h2 class="projeto-nome">Minha NFC</h2>
+        <div class="projeto-info">
+          <div class="projeto-meta"><span>Next.js · Supabase · PostgreSQL · Vercel</span><span>[2026]</span></div>
+            <p>Sistema que gerencia as plaquinhas NFC e QR Code da Minha NFC. Cada plaquinha recebe um link permanente; o chip e o QR Code apontam para ele, e o sistema redireciona para o destino escolhido: avaliação no Google, WhatsApp, Instagram, cardápio. Trocar o destino não exige regravar o chip nem reimprimir o QR Code.</p>
+            <p>Tem site público com compra pelo WhatsApp, painel administrativo (clientes, plaquinhas, QR Codes e estatísticas) e painel do cliente, onde ele mesmo muda o destino e vê os acessos.</p>
+          <div class="acoes">
+            <a class="btn-colchete" href="https://minhanfc.com.br" target="_blank" rel="noopener">[ Visitar Minha NFC ]</a>
+          </div>
+        </div>
+      </article>
 
-    <footer class="footer">
-        <p>&copy; <span id="year"></span> Leonardo de Carvalho da Costa. All rights reserved.</p>
-    </footer>
+      <article class="projeto revelar">
+        <div class="projeto-imagens">
+          <figure>
+            <img src="img/vigia-painel.jpg" alt="Ilustração do painel administrativo do Vigia" width="1600" height="1000" loading="lazy"><figcaption>Ilustração</figcaption>
+          </figure>
+          <figure>
+            <img src="img/vigia-apr.jpg" alt="Ilustração de uma Análise Preliminar de Risco no Vigia" width="1600" height="1000" loading="lazy"><figcaption>Ilustração</figcaption>
+          </figure>
+        </div>
+        <h2 class="projeto-nome">Vigia</h2>
+        <div class="projeto-info">
+          <div class="projeto-meta"><span>Next.js · NestJS · PostgreSQL · OIDC</span><span>[2026]</span></div>
+            <p>Base de uma plataforma brasileira para gerenciar análise de riscos (APR) e permissões de trabalho (PT) em atividades como trabalho em altura, espaços confinados e eletricidade, com foco na segurança dos trabalhadores e no registro de cada decisão.</p>
+            <p>A primeira fase já tem login com OIDC e verificação em dois passos, cadastro de empresas, unidades e perfis de acesso, banco PostgreSQL com segurança por linha (RLS) e trilha de auditoria. Em desenvolvimento.</p>
+          <div class="acoes">
+            <a class="btn-colchete" href="https://github.com/CostaLeoo/Site-APR-PT" target="_blank" rel="noopener">[ Ver no GitHub ]</a>
+          </div>
+        </div>
+      </article>
 
-    <script src="script.js"></script>
+      <div class="divisor revelar" id="automacoes"><span>Automações</span><span>(2)</span></div>
+
+      <article class="projeto revelar">
+        <div class="projeto-imagens">
+          <figure>
+            <img src="img/frota-mapa.jpg" alt="Ilustração do histórico de GPS com geofencing" width="1600" height="1000" loading="lazy"><figcaption>Ilustração</figcaption>
+          </figure>
+          <figure>
+            <img src="img/frota-planilha.jpg" alt="Ilustração da planilha de frota preenchida pela automação" width="1600" height="1000" loading="lazy"><figcaption>Ilustração</figcaption>
+          </figure>
+        </div>
+        <h2 class="projeto-nome">Controle de Frota</h2>
+        <div class="projeto-info">
+          <div class="projeto-meta"><span>Python · Tkinter · OpenPyXL · Geofencing</span><span>[2026]</span></div>
+            <p>Aplicação desktop que transforma o histórico de GPS dos veículos de uma empresa em registros de viagem e atualiza sozinha a planilha de controle. Antes, alguém precisava abrir o rastreador, analisar as posições de cada veículo e digitar os horários no Excel.</p>
+            <p>Com geofencing, o sistema detecta quando o veículo sai da empresa, chega ao contratante, sai de lá e volta, e preenche os horários mantendo fórmulas e formatação, sempre com backup antes de alterar.</p>
+            <table class="tabela antes-depois">
+              <thead><tr><th class="w40">Antes</th><th class="dir">Depois</th></tr></thead>
+              <tbody><tr><td>9 etapas manuais</td><td class="dir">4 etapas automáticas</td></tr></tbody>
+            </table>
+          <div class="acoes">
+            <a class="btn-colchete" href="https://github.com/CostaLeoo/Automacao-Frota" target="_blank" rel="noopener">[ Ver no GitHub ]</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="projeto revelar">
+        <div class="projeto-imagens">
+          <figure>
+            <img src="img/relatorios-word.jpg" alt="Ilustração das fotos indo para o relatório do Word" width="1600" height="1000" loading="lazy"><figcaption>Ilustração</figcaption>
+          </figure>
+          <figure>
+            <img src="img/relatorios-app.jpg" alt="Ilustração da tela da automação de relatórios" width="1600" height="1000" loading="lazy"><figcaption>Ilustração</figcaption>
+          </figure>
+        </div>
+        <h2 class="projeto-nome">Relatórios Fotográficos</h2>
+        <div class="projeto-info">
+          <div class="projeto-meta"><span>Python · Pillow · Word (COM/DOCX) · SQLite</span><span>[2026]</span></div>
+            <p>Aplicação desktop que encontra as fotos de cada empresa pela data e insere no relatório mensal certo do Microsoft Word, uma empresa por vez ou todas de uma vez.</p>
+            <p>Corrige a orientação das fotos, evita fotos repetidas com hash SHA-256, faz backup antes de mexer no documento, guarda o histórico em SQLite e tem modo de simulação e testes automatizados com Pytest.</p>
+            <table class="tabela antes-depois">
+              <thead><tr><th class="w40">Antes</th><th class="dir">Depois</th></tr></thead>
+              <tbody><tr><td>9 etapas por empresa</td><td class="dir">4 etapas para todas</td></tr></tbody>
+            </table>
+          <div class="acoes">
+            <a class="btn-colchete" href="https://github.com/CostaLeoo/Automacao-Relatorios" target="_blank" rel="noopener">[ Ver no GitHub ]</a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- ===== CONTATO ===== -->
+    <div class="pagina" data-pagina="3">
+      <!-- E-MAIL -->
+      <section id="email" class="secao">
+        <div class="secao-esquerda revelar">
+          <h1>Contato</h1>
+          <p>Quer conversar, propor algo ou só trocar uma ideia? É só chamar.</p>
+        </div>
+        <div class="secao-direita revelar">
+          <h2>E-mail</h2>
+          <a class="email-grande" href="mailto:profissional.leonardocosta@gmail.com">profissional.leonardocosta@gmail.com</a>
+          <div class="acoes">
+            <button class="btn-colchete" data-copiar="profissional.leonardocosta@gmail.com">[ Copiar e-mail ]</button>
+            <a class="btn-colchete" href="mailto:profissional.leonardocosta@gmail.com">[ Abrir no app de e-mail ]</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- REDES -->
+      <section id="redes" class="secao">
+        <div class="secao-esquerda revelar">
+          <h1>Redes</h1>
+          <p>Onde mais você me encontra.</p>
+        </div>
+        <div class="secao-direita revelar">
+          <h2>Perfis</h2>
+          <table class="tabela">
+            <thead><tr><th class="w40">Rede</th><th class="dir">Usuário</th></tr></thead>
+            <tbody>
+              <tr><td>GitHub</td><td class="dir"><a href="https://github.com/CostaLeoo" target="_blank" rel="noopener">/CostaLeoo</a></td></tr>
+              <tr><td>LinkedIn</td><td class="dir"><a href="https://www.linkedin.com/in/leonardo-carvalho-costa/" target="_blank" rel="noopener">/leonardo-carvalho-costa</a></td></tr>
+              <tr><td>Instagram</td><td class="dir"><a href="https://instagram.com/coxstaa" target="_blank" rel="noopener">@coxstaa</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+    </div>
+  </main>
+
+  <!-- ===== RODAPÉ ===== -->
+  <footer class="rodape">
+    <div class="rodape-colunas">
+      <div>
+        <h2>Contato</h2>
+        <ul class="rodape-lista">
+          <li><a href="https://github.com/CostaLeoo" target="_blank" rel="noopener"><span>GitHub</span><span>/CostaLeoo</span></a></li>
+          <li><a href="https://www.linkedin.com/in/leonardo-carvalho-costa/" target="_blank" rel="noopener"><span>LinkedIn</span><span>/leonardo-carvalho-costa</span></a></li>
+          <li><a href="https://instagram.com/coxstaa" target="_blank" rel="noopener"><span>Instagram</span><span>@coxstaa</span></a></li>
+          <li><a href="mailto:profissional.leonardocosta@gmail.com"><span>E-mail</span><span>profissional.leonardocosta@gmail.com</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Navegação</h2>
+        <ul class="rodape-lista">
+          <li><button data-pagina="0"><span>Leonardo Costa</span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20V4M5 11l7-7 7 7"/></svg></button></li>
+          <li><button data-pagina="1"><span>Estudos</span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20V4M5 11l7-7 7 7"/></svg></button></li>
+          <li><button data-pagina="2"><span>Projetos</span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20V4M5 11l7-7 7 7"/></svg></button></li>
+          <li><button data-pagina="3"><span>Contato</span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20V4M5 11l7-7 7 7"/></svg></button></li>
+        </ul>
+      </div>
+    </div>
+    <p class="creditos"><span>© <span class="ano"></span> Leonardo Costa</span><small>Desenhado e desenvolvido por Leonardo Costa</small></p>
+  </footer>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/",
+        "opentype": "https://cdn.jsdelivr.net/npm/opentype.js@1.3.4/dist/opentype.module.js"
+      }
+    }
+  </script>
+  <script src="script.js"></script>
+  <script type="module" src="cromado3d.js"></script>
 </body>
 </html>
