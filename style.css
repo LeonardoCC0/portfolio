@@ -224,7 +224,7 @@ h1, h2, h3 { font-weight: 400; line-height: 1; color: var(--titulo); }
   white-space: nowrap;
   transition: color .33s ease-in-out;
 }
-.faixa span { padding-right: .25em; animation: deslizar 38s linear infinite; }
+.faixa span { padding-right: .25em; animation: deslizar 38s linear infinite; will-change: transform; }
 .faixa-reversa span { animation-direction: reverse; }
 .faixa.terceira { display: none; }
 
@@ -244,7 +244,15 @@ h1, h2, h3 { font-weight: 400; line-height: 1; color: var(--titulo); }
   position: absolute; inset: 0;
   width: 100% !important; height: 100% !important;
 }
-.cromado canvas.solido { filter: drop-shadow(0 30px 40px var(--sombra-cromo)); }
+.cromado canvas.solido { filter: none; }   /* o drop-shadow aqui era o que mais travava */
+
+/* Sombra estática embaixo do objeto (não é recalculada a cada quadro) */
+.cromado::after {
+  content: ''; position: absolute; z-index: -1; pointer-events: none;
+  left: 15%; right: 15%; bottom: 4%; height: 12%;
+  background: radial-gradient(ellipse at center, var(--sombra-cromo), transparent 70%);
+}
+.cromado.sem-3d::after { display: none; }
 
 /* Plano B, se o 3D não carregar */
 .cromado.sem-3d { display: grid; place-items: center; }

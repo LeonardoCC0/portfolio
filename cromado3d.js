@@ -23,6 +23,43 @@ const ACELERACAO = 0.0001;     // quanto o giro acelera a cada quadro
 const RAIO_CIRCULO = 2000;     // raio do círculo que revela o objeto (px)
 const CENTRO_CIRCULO = -600;   // centro do círculo, acima do objeto (px)
 
+// ---------- Escolha automática do modo ----------
+// completo = 3D com tudo | leve = 3D simplificado | texto = sem 3D (texto cromado em CSS)
+// Para testar: index.html?modo=texto | ?modo=leve | ?modo=completo
+
+// Descobre se o navegador está desenhando o WebGL pelo PROCESSADOR (sem placa de vídeo)
+function gpuPorSoftware() {
+  try {
+    const c = document.createElement('canvas');
+    const gl = c.getContext('webgl') || c.getContext('experimental-webgl');
+    if (!gl) return true;
+    const info = gl.getExtension('WEBGL_debug_renderer_info');
+    const nome = info ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL)) : '';
+    console.info('[cromado3d] GPU:', nome || '(não informada)');
+    const perda = gl.getExtension('WEBGL_lose_context');
+    if (perda) perda.loseContext();
+    return /swiftshader|llvmpipe|softpipe|software|basic render/i.test(nome);
+  } catch (e) {
+    return true;
+  }
+}
+
+const params = new URLSearchParams(location.search);
+const pedido = params.get('modo');
+let modo;
+if (['texto', 'leve', 'completo'].includes(pedido)) modo = pedido;
+else if (params.has('lite')) modo = 'leve';
+else if (params.has('full')) modo = 'completo';
+else if (gpuPorSoftware()) modo = 'texto';
+else if ((navigator.hardwareConcurrency || 4) <= 4 || (navigator.deviceMemory || 8) <= 4) modo = 'leve';
+else modo = 'completo';
+console.info('[cromado3d] modo:', modo);
+
+const fraco = modo === 'leve';
+const QUALIDADE = fraco
+  ? { curva: 4,  bevel: 2, antialias: false, dpr: 0.6, intervalo: 50 }   // 60% da resolução, ~20 quadros/s
+  : { curva: 10, bevel: 4, antialias: true,  dpr: 1.5, intervalo: 0 };
+
 const caixa = document.querySelector('.cromado');
 const textos = [...document.querySelectorAll('.nav-item')].map(item => item.dataset.objeto);
 
@@ -40,12 +77,19 @@ window.cromado3d = {
 
 let iniciarMorph = () => {};
 
-if (caixa) iniciar().catch(erro => {
-  console.error('[cromado3d]', erro);
+function usarTextoReserva() {
   caixa.innerHTML = '';
   caixa.classList.add('sem-3d');
   mostrarTextoReserva();
-});
+}
+
+if (caixa) {
+  if (modo === 'texto') usarTextoReserva();
+  else iniciar().catch(erro => {
+    console.error('[cromado3d]', erro);
+    usarTextoReserva();
+  });
+}
 
 // Plano B (sem internet / navegador sem WebGL): texto cromado em CSS
 function mostrarTextoReserva() {
@@ -93,8 +137,8 @@ function criarGeometria(fonte, texto) {
     else if (c.type === 'C') shapePath.bezierCurveTo(c.x1, -c.y1, c.x2, -c.y2, c.x, -c.y);
   }
   const geo = new THREE.ExtrudeGeometry(shapePath.toShapes(false), {
-    depth: 14, curveSegments: 14,
-    bevelEnabled: true, bevelThickness: 7, bevelSize: 2.6, bevelSegments: 10
+    depth: 14, curveSegments: QUALIDADE.curva,
+    bevelEnabled: true, bevelThickness: 7, bevelSize: 2.6, bevelSegments: QUALIDADE.bevel
   });
   geo.center();
   // Todos os objetos ficam do mesmo tamanho visual
@@ -130,16 +174,16 @@ function texturaBolinha() {
 
 async function iniciar() {
   // ---------- Dois desenhos: objeto sólido e pontinhos ----------
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const dpr = Math.min(window.devicePixelRatio || 1, QUALIDADE.dpr);
 
-  const rSolido = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  const rSolido = new THREE.WebGLRenderer({ antialias: QUALIDADE.antialias, alpha: true });
   rSolido.setPixelRatio(dpr);
   rSolido.toneMapping = THREE.ACESFilmicToneMapping;
   rSolido.toneMappingExposure = 1.15;
   rSolido.outputColorSpace = THREE.SRGBColorSpace;
   rSolido.domElement.className = 'solido';
 
-  const rPontos = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  const rPontos = new THREE.WebGLRenderer({ antialias: QUALIDADE.antialias, alpha: true });
   rPontos.setPixelRatio(dpr);
   rPontos.domElement.className = 'pontos-3d';
 
@@ -163,21 +207,38 @@ async function iniciar() {
   });
   const fonte = opentype.parse(buffer);
 
-  const material = new THREE.MeshPhysicalMaterial({
-    color: 0xffffff, metalness: 1, roughness: 0.06, clearcoat: 1, clearcoatRoughness: 0.05
-  });
+  // Modo leve: material mais simples (sem a camada de verniz), reflexo quase igual
+  const material = fraco
+    ? new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 1, roughness: 0.1 })
+    : new THREE.MeshPhysicalMaterial({
+        color: 0xffffff, metalness: 1, roughness: 0.06, clearcoat: 1, clearcoatRoughness: 0.05
+      });
 
   const grupoSolido = new THREE.Group();
   cenaSolido.add(grupoSolido);
   const objetos = [], nuvens = [];
-  for (const texto of textos) {
-    const geo = criarGeometria(fonte, texto);
+  function construir(i) {
+    if (nuvens[i]) return;                 // já existe
+    const geo = criarGeometria(fonte, textos[i]);
     const mesh = new THREE.Mesh(geo, material);
     mesh.visible = false;
     grupoSolido.add(mesh);
-    objetos.push(mesh);
-    nuvens.push(criarNuvem(geo));
+    objetos[i] = mesh;
+    nuvens[i] = criarNuvem(geo);
   }
+  construir(atual);                        // só o objeto da seção atual agora
+
+  // Os outros são criados depois, um por vez, quando o navegador está parado
+  const agendar = f => ('requestIdleCallback' in window)
+    ? requestIdleCallback(f, { timeout: 2000 })
+    : setTimeout(f, 300);
+  function construirResto() {
+    const falta = textos.findIndex((_, i) => !nuvens[i]);
+    if (falta === -1) return;
+    construir(falta);
+    agendar(construirResto);
+  }
+  agendar(construirResto);
 
   caixa.append(rSolido.domElement, rPontos.domElement);
 
@@ -199,6 +260,7 @@ async function iniciar() {
   let para = nuvens[atual];
   let progressoMorph = 1;
   iniciarMorph = indice => {
+    construir(indice);                     // garante que o objeto existe
     de = new Float32Array(posicoes);
     para = nuvens[indice];
     progressoMorph = 0;
@@ -247,9 +309,12 @@ async function iniciar() {
     if (!document.getElementById('nav').matches(':hover')) window.cromado3d.solido();
   }, 1100);
 
-  function loop() {
+  let ultimoDesenho = 0, ultimoClip = '';
+  function loop(agora) {
     requestAnimationFrame(loop);
     if (!visivel) return;
+    // Modo leve: só desenha de novo depois de 50 ms (~20 quadros por segundo)
+    const pularDesenho = QUALIDADE.intervalo > 0 && (agora - ultimoDesenho < QUALIDADE.intervalo);
 
     // Quantidade de pontinhos crescendo no começo
     if (quantidade < TOTAL_PONTOS) {
@@ -282,10 +347,15 @@ async function iniciar() {
     }
 
     // Círculo que revela o sólido, vindo de cima
-    rSolido.domElement.style.clipPath = `circle(${abertura * RAIO_CIRCULO}px at 50% ${H / 2 + CENTRO_CIRCULO}px)`;
+    // Totalmente aberto: sem recorte (mais leve). Só mexe no estilo quando o valor muda.
+    const clip = abertura >= 1 ? 'none'
+      : `circle(${abertura * RAIO_CIRCULO}px at 50% ${H / 2 + CENTRO_CIRCULO}px)`;
+    if (clip !== ultimoClip) { rSolido.domElement.style.clipPath = clip; ultimoClip = clip; }
     matPontos.opacity = Math.max(0, 1 - abertura * 1.1);
     rPontos.domElement.style.visibility = abertura >= 0.95 ? 'hidden' : 'visible';
 
+    if (pularDesenho) return;
+    ultimoDesenho = agora;
     if (abertura > 0) rSolido.render(cenaSolido, camera);
     if (abertura < 0.95) rPontos.render(cenaPontos, camera);
   }
